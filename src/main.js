@@ -3,7 +3,6 @@ import iView from 'iview';
 import VueRouter from 'vue-router';
 import Routers from './router';
 import Vuex from 'vuex';
-import Util from './libs/util';
 import App from './app.vue';
 import 'iview/dist/styles/iview.css';
 import '../theme/theme.less';
@@ -42,7 +41,6 @@ const router = new VueRouter(RouterConfig);
 
 router.beforeEach((to, from, next) => {
     iView.LoadingBar.start();
-    Util.title(to.meta.title);
     next();
 });
 
