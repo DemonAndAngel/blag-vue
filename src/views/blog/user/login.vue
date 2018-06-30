@@ -83,7 +83,12 @@
             handleSubmit(name) {
                 this.$refs[name].validate((valid) => {
                     if (valid) {
-                        login(this.form);
+                        login(this.form).then((res)=>{
+                            let meta = res.meta;
+                            if(meta.code !== 0){
+                                this.$Message.error(meta.msg);
+                            }
+                        });
                     } else {
                         this.$Message.error('账号或密码格式错误！');
                     }
