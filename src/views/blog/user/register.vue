@@ -13,7 +13,7 @@
                 </FormItem>
                 <FormItem prop="nickname">
                     <Input type="text" v-model="form.nickname" placeholder="昵称">
-                    <Icon type="ios-locked-outline" slot="prepend"></Icon>
+                    <Icon type="ios-flame-outline" slot="prepend"></Icon>
                     </Input>
                 </FormItem>
                 <FormItem prop="password">
@@ -97,7 +97,7 @@
                 });
             },
             goLoginPage(){
-                this.$router.push({ name: 'blog-register'});
+                this.$router.replace({ name: 'blog-login'});
             }
         }
     };

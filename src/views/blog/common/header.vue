@@ -1,14 +1,32 @@
 <template>
     <div class="header">
+        <div class="header-logo" @click="goIndexPage()">
+            <img src="./img/logo.png"/>
+        </div>
         <div class="header-sel">
+            <div class="item-sel">
+                <a class="item-sel-btn">首页</a>
+            </div>
+            <div class="item-sel">
+                <a class="item-sel-btn">发现</a>
+            </div>
+            <div class="item-sel">
+                <a class="item-sel-btn">话题</a>
+            </div>
+            <div class="item-sel">
+                <Input class="search-input" v-model="search" icon="ios-search-strong" placeholder="搜索您感兴趣的帖子"
+                       @on-click="handleSearch()" @keyup.enter.native="handleSearch()">
+                </Input>
+            </div>
         </div>
         <div class="header-user" v-if="blogUserInfo">
             <Dropdown trigger="click">
-                <a href="javascript:void(0)" style="color:#666;font-size:12px;">
-                    {{ blogUserInfo.nickname }}<Avatar icon="person" style="margin-left:10px;" />
+                <a href="javascript:void(0)">
+                    {{ blogUserInfo.nickname }}
+                    <Avatar icon="person" style="margin-left:10px;"/>
                 </a>
                 <DropdownMenu slot="list">
-                    <DropdownItem >注销</DropdownItem>
+                    <DropdownItem>注销</DropdownItem>
                 </DropdownMenu>
             </Dropdown>
         </div>
@@ -19,9 +37,14 @@
     </div>
 </template>
 <script type="text/ecmascript-6">
-    import { mapState,mapMutations } from 'vuex';
-    export default {
+    import {mapState, mapMutations} from 'vuex';
 
+    export default {
+        data() {
+            return {
+                search: ''
+            }
+        },
         computed: {
             ...mapState([
                 'blogUserInfo'
@@ -33,13 +56,16 @@
                 'REMOVE_USER_INFO'
             ]),
             goIndexPage() {
-                this.$router.push({ name: 'blog-index' })
+                this.$router.push({name: 'blog-index'})
             },
-            goLoginPage(){
-                this.$router.push({ name: 'blog-login' })
+            goLoginPage() {
+                this.$router.push({name: 'blog-login'})
             },
-            goRegisterPage(){
-                this.$router.push({ name: 'blog-register' })
+            goRegisterPage() {
+                this.$router.push({name: 'blog-register'})
+            },
+            handleSearch() {
+                this.$Message.info('测试');
             }
         },
     }

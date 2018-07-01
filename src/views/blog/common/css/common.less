@@ -3,20 +3,20 @@
 html,
 body {
   display: flex;
-  height: 100%;
+  height: auto;
   min-height: 100%;
   width: 100%;
   /* overflow-x: scroll; */
 }
 
-.app {
-  min-height: 100%;
-  height: 100%;
-  width: 100%;
-  background-color: @blog-background-color;
-  color: @blog-color;
-  /* overflow-x:scroll; */
-}
+//.app {
+//  min-height: 100%;
+//  height: auto;
+//  width: 100%;
+//  background-color: @blog-background-color;
+//  color: @blog-color;
+//  /* overflow-x:scroll; */
+//}
 
 * {
   margin: 0;
@@ -24,9 +24,13 @@ body {
 }
 
 .blog {
+  min-height: 100%;
+  height: auto;
+  width: 100%;
+  background-color: @blog-background-color;
+  color: @blog-color;
   display: flex;
   flex-direction: column;
-  height: 100%;
   //flex-direction 属性决定主轴的方向（即项目的排列方向）。
   //flex-wrap 属性定义，如果一条轴线排不下，如何换行。
   //flex-flow 属性是flex-direction属性和flex-wrap属性的简写形式，默认值为row nowrap。
@@ -43,22 +47,58 @@ body {
     order: 0;
     width: 100%;
     padding: 0 50px;
-    height: 80px;
-    line-height: 80px;
+    height: @blog-header-height;
+    line-height: @blog-header-height;
     background-color: @primary-color;
     display: inline-flex;
     flex-direction: row;
+    .header-logo {
+      cursor: pointer;
+      img {
+        height: @blog-header-height;
+      }
+    }
     .header-sel {
-      flex: 1
+      flex: 1;
+      display: inline-flex;
+      flex-direction: row;
+      align-items: center;
+      padding-left: 30px;
+      .item-sel {
+        padding: 0 15px;
+        .item-sel-btn {
+          font-size: 15px;
+          color: #ffffff;
+        }
+        .item-sel-btn:hover {
+          color: #b7b7b7;
+        }
+        .search-input {
+          input {
+            background-color: #ececec;
+            width: 300px;
+          }
+          input:focus {
+            background-color: #fff;
+            width: 300px;
+          }
+        }
+      }
     }
     .header-user {
       .login-btn {
         font-size: 15px;
         color: #ffffff;
       }
+      .login-btn:hover {
+        color: #b7b7b7;
+      }
       .register-btn {
         font-size: 15px;
         color: #f2a200
+      }
+      .register-btn:hover {
+        color: #c67a00
       }
     }
   }
@@ -66,8 +106,8 @@ body {
     order: 999;
     width: 100%;
     padding: 0 50px;
-    height: 80px;
-    line-height: 80px;
+    height: @blog-footer-height;
+    line-height: @blog-footer-height;
     background-color: @blog-footer-color;
     display: inline-flex;
   }

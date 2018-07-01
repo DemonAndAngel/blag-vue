@@ -6,7 +6,6 @@
         <Row type="flex" justify="center" align="middle">
             <Col span="24">
                 <h1>
-                    <img src="https://raw.githubusercontent.com/iview/iview/master/assets/logo.png">
                 </h1>
                 <h2>
                     <p>Welcome to your iView app!</p>

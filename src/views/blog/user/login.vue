@@ -65,7 +65,7 @@
                 });
             },
             goRegisterPage(){
-                this.$router.push({ name: 'blog-register'});
+                this.$router.replace({ name: 'blog-register'});
             }
         }
     };
