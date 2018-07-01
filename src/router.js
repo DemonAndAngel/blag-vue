@@ -1,22 +1,37 @@
-const Index = (resolve) => require(['./views/blog/index.vue'], resolve);
-const Login = (resolve) => require(['./views/blog/user/login.vue'], resolve);
+const BlogApp = (resolve) => require(['./views/blog/app.vue'], resolve);
+const BlogIndex = (resolve) => require(['./views/blog/index.vue'], resolve);
+const BlogLogin = (resolve) => require(['./views/blog/user/login.vue'], resolve);
+const BlogRegister = (resolve) => require(['./views/blog/user/register.vue'], resolve);
 
 
 const routers = [
     {
         path: '/',
-        redirect: '/blog'
+        redirect: '/blog/index'
     },
     {
         path: '/blog',
-        name: 'index',
-        component: Index
+        name: 'blog-app',
+        component: BlogApp,
+        children: [
+            {
+                path: 'index',
+                name: 'blog-index',
+                component: BlogIndex,
+            },
+            {
+                path: 'login',
+                name: 'blog-login',
+                component: BlogLogin,
+            },
+            {
+                path: 'register',
+                name: 'blog-register',
+                component: BlogRegister,
+            }
+        ]
     },
-    {
-        path: '/blog/login',
-        name: 'login',
-        component: Login
-    }
+
 ];
 
 

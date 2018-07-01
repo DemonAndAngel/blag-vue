@@ -1,39 +1,11 @@
-<style scoped>
-    .index {
-        width: 100%;
-        position: absolute;
-        top: 0;
-        bottom: 0;
-        left: 0;
-        text-align: center;
-    }
-
-    .index h1 {
-        height: 150px;
-    }
-
-    .index h1 img {
-        height: 100%;
-    }
-
-    .index h2 {
-        color: #666;
-        margin-bottom: 200px;
-    }
-
-    .index h2 p {
-        margin: 0 0 50px;
-    }
-
-    .index .ivu-row-flex {
-        height: 100%;
-    }
+<style lang="less">
+    @import "../css/user/login";
 </style>
 <template>
-    <div class="index">
-        <header></header>
-        <template>
-            <Form ref="form" :model="form" :rules="rule">
+    <div class="login">
+        <div class="login-form">
+            <div class="title">登录</div>
+            <Form ref="form" :model="form" :rules="rule" class="form">
                 <FormItem prop="account">
                     <Input type="text" v-model="form.account" placeholder="账号">
                     <Icon type="ios-person-outline" slot="prepend"></Icon>
@@ -45,16 +17,16 @@
                     </Input>
                 </FormItem>
                 <FormItem>
-                    <Button type="primary" @click="handleSubmit('form')">登录</Button>
+                    <Button class="login-btn" type="primary" @click="handleSubmit('form')">登录</Button>
+                </FormItem>
+                <FormItem class="register-form-item">
+                    还没有账号<a class="register-btn" href="javascript:void(0)" @click="goRegisterPage()">立即注册</a>
                 </FormItem>
             </Form>
-        </template>
-
-
+        </div>
     </div>
 </template>
 <script>
-    import Header from '../common/header.vue';
 
     import {login} from '../../../api/blag/user';
 
@@ -67,17 +39,15 @@
                 },
                 rule: {
                     account: [
-                        {required: true, message: '用户名不能为空', trigger: 'blur'}
+                        {required: true, message: '账号不能为空', trigger: 'blur'},
+                        {type: 'string', message: '账号格式有误', trigger: 'change'}
                     ],
                     password: [
                         {required: true, message: '密码不能为空', trigger: 'blur'},
-                        {type: 'string', min: 6, message: '密码不能小于6位', trigger: 'blur'}
+                        {type: 'string', min: 6,max:20, message: '密码不能小于6位且不能大于20位', trigger: 'change'},
                     ]
                 }
             };
-        },
-        components: {
-            Header
         },
         methods: {
             handleSubmit(name) {
@@ -93,6 +63,9 @@
                         this.$Message.error('账号或密码格式错误！');
                     }
                 });
+            },
+            goRegisterPage(){
+                this.$router.push({ name: 'blog-register'});
             }
         }
     };

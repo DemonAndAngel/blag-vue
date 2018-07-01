@@ -1,0 +1,36 @@
+@import "../../common/css/common";
+
+.blog {
+  .register {
+    flex: 1;
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    .register-form {
+      border-radius:20px;
+      background-color: @auxiliary-color;
+      width: 330px;
+      text-align: center;
+      padding: 25px 35px;
+      .title {
+        height: 52px;
+        text-align: center;
+        line-height: 52px;
+        font-size: 36px;
+      }
+      .form {
+        margin-top: 15px;
+        .register-btn {
+          width:100%;
+        }
+        .login-form-item{
+          text-align:left;
+          .login-btn {
+            float: right
+          }
+        }
+      }
+    }
+  }
+}

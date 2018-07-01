@@ -2,7 +2,8 @@ import Vue from 'vue';
 import iView from 'iview';
 import VueRouter from 'vue-router';
 import Routers from './router';
-import Vuex from 'vuex';
+import store from './store/index';
+// import Vuex from 'vuex';
 import App from './app.vue';
 import 'iview/dist/styles/iview.css';
 import '../theme/theme.less';
@@ -13,7 +14,6 @@ import zhLocale from 'iview/src/locale/lang/zh-CN';
 import enLocale from 'iview/src/locale/lang/en-US';
 
 Vue.use(VueRouter);
-Vue.use(Vuex);
 Vue.use(VueI18n);
 Vue.use(iView);
 
@@ -50,20 +50,20 @@ router.afterEach(() => {
 });
 
 
-const store = new Vuex.Store({
-    state: {
-
-    },
-    getters: {
-
-    },
-    mutations: {
-
-    },
-    actions: {
-
-    }
-});
+// const store = new Vuex.Store({
+//     state: {
+//
+//     },
+//     getters: {
+//
+//     },
+//     mutations: {
+//
+//     },
+//     actions: {
+//
+//     }
+// });
 
 
 new Vue({
