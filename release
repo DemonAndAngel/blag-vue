@@ -1,11 +1,11 @@
 #!/bin/bash
-echo '开始拉取最新代码'
+echo -e "\033[33m 开始拉取最新代码 \033[0m"
 git pull
 if [ $1 -a $1 == "install" ];
 then
-    echo '安装npm依赖'
+    echo -e "\033[43;37m 安装npm依赖 \033[0m"
     npm install
 fi
-echo '发布代码'
+echo -e "\033[33m 发布代码 \033[0m"
 npm run build
-echo '发布成功'
+echo -e "\033[32m 发布成功 \033[0m"
