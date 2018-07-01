@@ -1,0 +1,8 @@
+#!/bin/bash
+echo '开始拉取最新代码'
+git pull
+echo '安装npm依赖'
+npm install
+echo '发布代码'
+npm run build
+echo '发布成功'
