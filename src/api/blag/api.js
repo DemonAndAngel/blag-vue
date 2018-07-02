@@ -33,7 +33,7 @@ const api = util.ajax;
 //     return Promise.reject(error);
 // });
 let csrfToken = window.document.getElementById('csrf-token');
-if(csrfToken)
+if (csrfToken)
     csrfToken = csrfToken.getAttribute('content')
 else
     csrfToken = '';
@@ -79,5 +79,20 @@ export default {
                 reject(error);
             });
         });
-    }
+    },
+    fetchDel(url, params = {}, headers = {}) {
+        headers['X-CSRFToken'] = csrfToken;
+        return new Promise((resolve, reject) => {
+            api.delete(url, params, {
+                headers: headers
+            }).then(res => {
+                resolve(res.data);
+            }).then(res => {
+                resolve(res.data);
+            }).catch(error => {
+                reject(error);
+            });
+        });
+    },
+    baseUrl: 'api/',
 };

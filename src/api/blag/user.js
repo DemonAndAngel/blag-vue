@@ -1,15 +1,13 @@
 import api from './api';
 
-const baseUrl = 'api/';
-
 export const login = (params) => {
-    return api.fetchPost(baseUrl + 'loginHandle/', params);
+    return api.fetchPost(api.baseUrl + 'login/handle/', params);
 };
 
 export const loginOut = (params) => {
-    return api.fetchPost(baseUrl + 'logoutHandle/', params);
+    return api.fetchPost(api.baseUrl + 'logout/handle/', params);
 };
 
 export const register = (params) => {
-    return api.fetchPost(baseUrl + 'registerHandle/', params);
+    return api.fetchPost(api.baseUrl + 'register/handle/', params);
 };
