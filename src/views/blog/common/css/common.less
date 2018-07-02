@@ -46,59 +46,66 @@ body {
     //align-self 属性允许单个项目有与其他项目不一样的对齐方式，可覆盖align-items属性。默认值为auto，表示继承父元素的align-items属性，如果没有父元素，则等同于stretch。
     order: 0;
     width: 100%;
-    padding: 0 50px;
     height: @blog-header-height;
     line-height: @blog-header-height;
     background-color: @primary-color;
     display: inline-flex;
     flex-direction: row;
-    .header-logo {
-      cursor: pointer;
-      img {
-        height: @blog-header-height;
-      }
+    .header-offset {
+      flex: @blog-offset;
     }
-    .header-sel {
-      flex: 1;
+    .header-content {
+      flex: @blog-left-content+@blog-right-content;
       display: inline-flex;
       flex-direction: row;
-      align-items: center;
-      padding-left: 30px;
-      .item-sel {
-        padding: 0 15px;
-        .item-sel-btn {
+      .header-logo {
+        cursor: pointer;
+        img {
+          height: @blog-header-height;
+        }
+      }
+      .header-sel {
+        flex: 1;
+        display: inline-flex;
+        flex-direction: row;
+        align-items: center;
+        padding-left: 30px;
+        .item-sel {
+          padding: 0 15px;
+          .item-sel-btn {
+            font-size: 15px;
+            color: @auxiliary-color;
+          }
+          .item-sel-btn:hover {
+            color: #b7b7b7;
+          }
+          .search-input {
+            input {
+              background-color: #ececec;
+              width: 300px;
+            }
+            input:focus {
+              background-color: #fff;
+              width: 300px;
+            }
+          }
+        }
+      }
+      .header-user {
+        .login-btn {
           font-size: 15px;
           color: @auxiliary-color;
         }
-        .item-sel-btn:hover {
+        .login-btn:hover {
           color: #b7b7b7;
         }
-        .search-input {
-          input {
-            background-color: #ececec;
-            width: 300px;
-          }
-          input:focus {
-            background-color: #fff;
-            width: 300px;
-          }
+        .register-btn {
+          font-size: 15px;
+          color: #f2a200
         }
-      }
-    }
-    .header-user {
-      .login-btn {
-        font-size: 15px;
-        color: @auxiliary-color;
-      }
-      .login-btn:hover {
-        color: #b7b7b7;
-      }
-      .register-btn {
-        font-size: 15px;
-        color: #f2a200
-      }
-      .register-btn:hover {
-        color: #c67a00
+        .register-btn:hover {
+          color: #c67a00
+        }
       }
     }
   }
@@ -112,7 +119,7 @@ body {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    .content{
+    .content {
 
     }
   }

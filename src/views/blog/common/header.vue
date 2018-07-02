@@ -1,39 +1,43 @@
 <template>
     <div class="header">
-        <div class="header-logo" @click="goIndexPage()">
-            <img src="./img/logo.png"/>
-        </div>
-        <div class="header-sel">
-            <div class="item-sel">
-                <a class="item-sel-btn">首页</a>
+        <div class="header-offset"></div>
+        <div class="header-content">
+            <div class="header-logo" @click="goIndexPage()">
+                <img src="./img/logo.png"/>
             </div>
-            <div class="item-sel">
-                <a class="item-sel-btn">发现</a>
+            <div class="header-sel">
+                <div class="item-sel">
+                    <a class="item-sel-btn">首页</a>
+                </div>
+                <div class="item-sel">
+                    <a class="item-sel-btn">发现</a>
+                </div>
+                <div class="item-sel">
+                    <a class="item-sel-btn">小说</a>
+                </div>
+                <div class="item-sel">
+                    <Input class="search-input" v-model="search" icon="ios-search-strong" placeholder="搜索您感兴趣的帖子"
+                           @on-click="handleSearch()" @keyup.enter.native="handleSearch()">
+                    </Input>
+                </div>
             </div>
-            <div class="item-sel">
-                <a class="item-sel-btn">小说</a>
+            <div class="header-user" v-if="blogUserInfo">
+                <Dropdown @on-click="handleDropDown" >
+                    <a href="javascript:void(0)" class="login-btn">
+                        {{ blogUserInfo.nickname }}
+                        <Avatar icon="person" style="margin-left:10px;"/>
+                    </a>
+                    <DropdownMenu slot="list">
+                        <DropdownItem name="log-out">注销</DropdownItem>
+                    </DropdownMenu>
+                </Dropdown>
             </div>
-            <div class="item-sel">
-                <Input class="search-input" v-model="search" icon="ios-search-strong" placeholder="搜索您感兴趣的帖子"
-                       @on-click="handleSearch()" @keyup.enter.native="handleSearch()">
-                </Input>
+            <div class="header-user" v-else>
+                <a class="login-btn" href="javascript:void(0)" @click="goLoginPage()">登录/</a>
+                <a class="register-btn" href="javascript:void(0)" @click="goRegisterPage()">注册</a>
             </div>
         </div>
-        <div class="header-user" v-if="blogUserInfo">
-            <Dropdown @on-click="handleDropDown" >
-                <a href="javascript:void(0)" class="login-btn">
-                    {{ blogUserInfo.nickname }}
-                    <Avatar icon="person" style="margin-left:10px;"/>
-                </a>
-                <DropdownMenu slot="list">
-                    <DropdownItem name="log-out">注销</DropdownItem>
-                </DropdownMenu>
-            </Dropdown>
-        </div>
-        <div class="header-user" v-else>
-            <a class="login-btn" href="javascript:void(0)" @click="goLoginPage()">登录/</a>
-            <a class="register-btn" href="javascript:void(0)" @click="goRegisterPage()">注册</a>
-        </div>
+        <div class="header-offset"></div>
     </div>
 </template>
 <script type="text/ecmascript-6">
