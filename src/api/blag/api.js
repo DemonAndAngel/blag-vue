@@ -65,5 +65,19 @@ export default {
                 reject(error);
             });
         });
+    },
+    fetchPut(url, params = {}, headers = {}) {
+        headers['X-CSRFToken'] = csrfToken;
+        return new Promise((resolve, reject) => {
+            api.put(url, params, {
+                headers: headers
+            }).then(res => {
+                resolve(res.data);
+            }).then(res => {
+                resolve(res.data);
+            }).catch(error => {
+                reject(error);
+            });
+        });
     }
 };

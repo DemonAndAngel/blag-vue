@@ -7,12 +7,14 @@
             <div class="title">登录</div>
             <Form ref="form" :model="form" :rules="rule" class="form">
                 <FormItem prop="account">
-                    <Input type="text" v-model="form.account" placeholder="账号">
+                    <Input type="text" v-model="form.account" placeholder="账号"
+                           @keyup.enter.native="handleSubmit('form')">
                     <Icon type="ios-person-outline" slot="prepend"></Icon>
                     </Input>
                 </FormItem>
                 <FormItem prop="password">
-                    <Input type="password" v-model="form.password" placeholder="密码">
+                    <Input type="password" v-model="form.password" placeholder="密码"
+                           @keyup.enter.native="handleSubmit('form')">
                     <Icon type="ios-locked-outline" slot="prepend"></Icon>
                     </Input>
                 </FormItem>
@@ -29,6 +31,7 @@
 <script>
 
     import {login} from '../../../api/blag/user';
+    import {mapMutations} from 'vuex';
 
     export default {
         data() {
@@ -44,19 +47,30 @@
                     ],
                     password: [
                         {required: true, message: '密码不能为空', trigger: 'blur'},
-                        {type: 'string', min: 6,max:20, message: '密码不能小于6位且不能大于20位', trigger: 'change'},
+                        {type: 'string', min: 6, max: 20, message: '密码不能小于6位且不能大于20位', trigger: 'change'},
                     ]
                 }
             };
         },
         methods: {
+            ...mapMutations([
+                'BLOG_SAVE_USER_INFO'
+            ]),
             handleSubmit(name) {
                 this.$refs[name].validate((valid) => {
                     if (valid) {
-                        login(this.form).then((res)=>{
+                        login(this.form).then((res) => {
                             let meta = res.meta;
-                            if(meta.code !== 0){
+                            if (meta.code !== 0) {
                                 this.$Message.error(meta.msg);
+                            } else {
+                                let data = res.data;
+                                this.BLOG_SAVE_USER_INFO(data.user);
+                                let url = this.$route.query.url;
+                                if (url)
+                                    window.location.href = url;
+                                else
+                                    this.$router.replace({name: 'blog-index'});
                             }
                         });
                     } else {
@@ -64,8 +78,8 @@
                     }
                 });
             },
-            goRegisterPage(){
-                this.$router.replace({ name: 'blog-register'});
+            goRegisterPage() {
+                this.$router.replace({name: 'blog-register'});
             }
         }
     };

@@ -11,7 +11,7 @@
                 <a class="item-sel-btn">发现</a>
             </div>
             <div class="item-sel">
-                <a class="item-sel-btn">话题</a>
+                <a class="item-sel-btn">小说</a>
             </div>
             <div class="item-sel">
                 <Input class="search-input" v-model="search" icon="ios-search-strong" placeholder="搜索您感兴趣的帖子"
@@ -20,13 +20,13 @@
             </div>
         </div>
         <div class="header-user" v-if="blogUserInfo">
-            <Dropdown trigger="click">
-                <a href="javascript:void(0)">
+            <Dropdown @on-click="handleDropDown" >
+                <a href="javascript:void(0)" class="login-btn">
                     {{ blogUserInfo.nickname }}
                     <Avatar icon="person" style="margin-left:10px;"/>
                 </a>
                 <DropdownMenu slot="list">
-                    <DropdownItem>注销</DropdownItem>
+                    <DropdownItem name="log-out">注销</DropdownItem>
                 </DropdownMenu>
             </Dropdown>
         </div>
@@ -38,6 +38,7 @@
 </template>
 <script type="text/ecmascript-6">
     import {mapState, mapMutations} from 'vuex';
+    import {loginOut} from '../../../api/blag/user';
 
     export default {
         data() {
@@ -52,8 +53,8 @@
         },
         methods: {
             ...mapMutations([
-                'GET_USER_INFO',
-                'REMOVE_USER_INFO'
+                'BLOG_GET_USER_INFO',
+                'BLOG_REMOVE_USER_INFO'
             ]),
             goIndexPage() {
                 this.$router.push({name: 'blog-index'})
@@ -66,7 +67,24 @@
             },
             handleSearch() {
                 this.$Message.info('测试');
+            },
+            handleDropDown(name){
+                switch (name){
+                    case 'log-out':
+                        loginOut().then((res)=>{
+                            if(res.meta.code!==0)
+                                this.$Message.error(res.meta.msg);
+                            else
+                                this.BLOG_REMOVE_USER_INFO();
+                        });
+                        break;
+                    default:
+                        break;
+                }
             }
         },
+        created(){
+            this.BLOG_GET_USER_INFO();
+        }
     }
 </script>

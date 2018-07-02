@@ -1,0 +1,43 @@
+@import "../common/css/common";
+
+.blog {
+  .write {
+    display: inline-flex;
+    flex-direction: row;
+    //justify-content: center;
+    align-items: center;
+    width: 100%;
+    //height: auto;
+    //min-height: 100%;
+    .sel {
+      flex: 1;
+    }
+    .content {
+      flex: 3;
+      background-color: @blog-background-color;
+      padding: 20px 5px;
+      min-height: 100px;
+      display: inline-flex;
+      flex-direction: column;
+      justify-content: center;
+      .title {
+        input {
+          padding: 30px 10px;
+          font-weight: bold;
+          font-size: 30px;
+        }
+      }
+      .btn-div {
+        padding-top: 20px;
+        display: inline-flex;
+        flex-direction: row;
+        justify-content: center;
+        .btn{
+          padding: 10px 30px;
+          font-size: 30px;
+          font-weight: bold;
+        }
+      }
+    }
+  }
+}

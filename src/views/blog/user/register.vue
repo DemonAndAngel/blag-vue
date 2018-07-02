@@ -39,7 +39,7 @@
 <script>
     import Header from '../common/header.vue';
 
-    import {register} from '../../../api/blag/user';
+    import {login,register} from '../../../api/blag/user';
 
     export default {
         data() {
@@ -89,6 +89,17 @@
                             let meta = res.meta;
                             if (meta.code !== 0) {
                                 this.$Message.error(meta.msg);
+                            }else{
+                                login(this.form).then((res)=>{
+                                    let meta = res.meta;
+                                    if(meta.code === 0){
+                                        let url = this.$route.query.url;
+                                        if (url)
+                                            window.location.href = url;
+                                        else
+                                            this.$router.replace({name: 'blog-index'});
+                                    }
+                                });
                             }
                         });
                     } else {
