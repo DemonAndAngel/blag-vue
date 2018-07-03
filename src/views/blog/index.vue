@@ -26,11 +26,20 @@
     </div>
 </template>
 <script>
+    import {getBlogList} from '../../api/blag/blog';
     export default {
         methods: {
             goWrite(){
                 this.$router.push({ name: 'blog-write'});
+            },
+            getBlogList(){
+                getBlogList().then((res)=>{
+                    console.log(res);
+                });
             }
+        },
+        created(){
+            this.getBlogList();
         }
     };
 </script>

@@ -39,7 +39,8 @@
 <script>
     import Header from '../common/header.vue';
 
-    import {login,register} from '../../../api/blag/user';
+    import {login, register} from '../../../api/blag/user';
+    import {mapMutations} from 'vuex';
 
     export default {
         data() {
@@ -61,11 +62,11 @@
                     ],
                     password: [
                         {required: true, message: '密码不能为空', trigger: 'blur'},
-                        {type: 'string', min: 6,max:20, message: '密码不能小于6位且不能大于20位', trigger: 'change'},
+                        {type: 'string', min: 6, max: 20, message: '密码不能小于6位且不能大于20位', trigger: 'change'},
                     ],
                     password_c: [
                         {required: true, message: '确认密码不能为空', trigger: 'blur'},
-                        {type: 'string', min: 6,max:20, message: '确认密码不能小于6位且不能大于20位', trigger: 'change'},
+                        {type: 'string', min: 6, max: 20, message: '确认密码不能小于6位且不能大于20位', trigger: 'change'},
                         {validator: this.validatePassCheck, trigger: 'change'},
                     ]
                 },
@@ -82,6 +83,9 @@
             Header
         },
         methods: {
+            ...mapMutations([
+                'BLOG_SAVE_USER_INFO'
+            ]),
             handleSubmit(name) {
                 this.$refs[name].validate((valid) => {
                     if (valid) {
@@ -89,10 +93,12 @@
                             let meta = res.meta;
                             if (meta.code !== 0) {
                                 this.$Message.error(meta.msg);
-                            }else{
-                                login(this.form).then((res)=>{
+                            } else {
+                                login(this.form).then((res) => {
                                     let meta = res.meta;
-                                    if(meta.code === 0){
+                                    let data = res.data;
+                                    if (meta.code === 0) {
+                                        this.BLOG_SAVE_USER_INFO(data.user);
                                         let url = this.$route.query.url;
                                         if (url)
                                             window.location.href = url;
@@ -107,8 +113,8 @@
                     }
                 });
             },
-            goLoginPage(){
-                this.$router.replace({ name: 'blog-login'});
+            goLoginPage() {
+                this.$router.replace({name: 'blog-login'});
             }
         }
     };

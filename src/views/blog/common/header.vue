@@ -25,10 +25,18 @@
                 <Dropdown @on-click="handleDropDown" >
                     <a href="javascript:void(0)" class="login-btn">
                         {{ blogUserInfo.nickname }}
-                        <Avatar icon="person" style="margin-left:10px;"/>
+                        <Avatar :src="blogUserInfo.avatar_url" style="margin-left:10px;" v-if="blogUserInfo.avatar_url != ''"/>
+                        <Avatar icon="person" style="margin-left:10px;" v-else/>
                     </a>
-                    <DropdownMenu slot="list">
-                        <DropdownItem name="log-out">注销</DropdownItem>
+                    <DropdownMenu slot="list" class="dropdown-menu">
+                        <DropdownItem name="setting">
+                            <Icon class="font" type="ios-gear-outline"></Icon>
+                            <font class="font">设置</font>
+                        </DropdownItem>
+                        <DropdownItem name="log-out">
+                            <Icon class="font" type="log-out"></Icon>
+                            <font class="font">注销</font>
+                        </DropdownItem>
                     </DropdownMenu>
                 </Dropdown>
             </div>
@@ -81,6 +89,9 @@
                             else
                                 this.BLOG_REMOVE_USER_INFO();
                         });
+                        break;
+                    case 'setting':
+                        this.$router.push({name:'blog-user-setting'});
                         break;
                     default:
                         break;
