@@ -1,0 +1,3 @@
+#!/bin/bash
+echo -e "\033[33m 开启调试 \033[0m"
+npm run dev

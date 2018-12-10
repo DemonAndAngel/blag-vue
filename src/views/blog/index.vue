@@ -16,7 +16,10 @@
                     </div>
             </div>
             <div class="content">
-                asdasd
+                <div class="list">
+                    <div class="title">头部</div>
+                    <div class="content">列表类容</div>
+                </div>
             </div>
         </div>
         <div class="right">
